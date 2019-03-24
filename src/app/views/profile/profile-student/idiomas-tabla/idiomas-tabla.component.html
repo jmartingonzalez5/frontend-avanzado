@@ -1,0 +1,21 @@
+<h2> Idiomas </h2>
+<table>
+    <tr>
+        <th> Idioma </th>
+        <th> Nivel </th>
+        <th> Fecha </th>
+        <th colspan="2"> Operaciones </th>
+    </tr>
+    <tr *ngFor="let idiomaStudent of profileStudent.idiomas; let index=index">
+        <td *ngIf="idiomaStudent.idioma"> {{idiomaStudent.idioma}} </td>
+        <td *ngIf="idiomaStudent.otroIdioma"> {{idiomaStudent.otroIdioma}} </td>
+        <td> {{idiomaStudent.nivel}} </td>
+        <td> {{idiomaStudent.fecha}} </td>
+        <td><button (click)="editarIdioma(index)"> Editar </button></td>
+        <td><button (click)="borrarIdioma(index)"> Borrar </button></td>
+    </tr>
+</table>
+<button (click)="nuevoIdioma()"> Nuevo Idioma </button>
+
+
+<button routerLink="/user/profile"> Volver al profile </button>
