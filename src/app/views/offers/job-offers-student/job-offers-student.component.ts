@@ -58,8 +58,8 @@ export class JobOffersStudentComponent implements OnInit {
         if (typeof result !== 'undefined') return true;
 
         // Si no se ha encontrado como Título Universitario .. buscarlo en los Ciclos Formativos:
-        result = this.profileStudent.ciclosFormativos.find(x => x.familiaProfesional === familiaProfesionalOferta);
-        if (typeof result !== 'undefined') return true;
+        var result2 = this.profileStudent.ciclosFormativos.find(x => x.familiaProfesional === familiaProfesionalOferta);
+        if (typeof result2 !== 'undefined') return true;
         // Devolver falso: no se ha encontrado ni como título universitario ni dentro de una de las familias profesionales
         // de los ciclos formativos del usuario
         return false;
