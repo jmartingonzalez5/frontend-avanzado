@@ -1,0 +1,155 @@
+<h3>{{titulo}}</h3>
+
+
+    <div>
+        <label [attr.for]="tipoTitulo">Tipo Título: </label>
+        <select name="tipoTitulo" [(ngModel)]="tipoFormacion" [disabled]="deshabilitarTipoDocumento">
+            <option value="Universidad">Título Universitario</option>
+            <option value="Ciclos">Ciclo Formativo</option>
+            <option value="Otro título">Otro Título</option>
+        </select>
+    </div>
+
+
+
+<div *ngIf="tipoFormacion === 'Universidad'">
+<form [formGroup]="tituloUniversitarioForm">
+    <!-- Opcion Título Universitario -->
+    <fieldset>
+        <legend>Título Universitario</legend>
+        <div>
+            <label [attr.for]="centro">Nombre de centro: </label>
+            <input type="text" size="40" id="centro" name="centro" [(ngModel)]="tituloUniversitario.centro" formControlName="centro">
+        </div>
+        <div [hidden]="tituloUniversitarioForm.controls['centro'].valid || tituloUniversitarioForm.controls['centro'].untouched">
+            <div [hidden]="!tituloUniversitarioForm.controls['centro'].hasError('required')">El 'Centro' es obligatorio</div>
+        </div>
+
+        <div>
+            <label [attr.for]="titulo">Título: </label>
+            <input type="text" size="40" id="titulo" name="titulo" [(ngModel)]="tituloUniversitario.titulo" formControlName="titulo">
+        </div>
+        <div [hidden]="tituloUniversitarioForm.controls['titulo'].valid || tituloUniversitarioForm.controls['titulo'].untouched">
+            <div [hidden]="!tituloUniversitarioForm.controls['titulo'].hasError('required')">El 'Título' es obligatorio</div>
+        </div>
+
+        <div>
+            <label [attr.for]="fechaTitulo">Fecha del Título: </label>
+            <input type="text" id="fechaTitulo" name="fechaTitulo" [(ngModel)]="tituloUniversitario.fechaTitulo" formControlName="fechaTitulo">
+        </div>
+
+        <div>
+            <label [attr.for]="bilingue">Formación Bilingue: </label>
+            <input type="checkbox" id="bilingue" value="bilingue" name="bilingue" [(ngModel)]="tituloUniversitario.bilingue" formControlName="bilingue">
+        </div>
+
+        <div>
+            <label [attr.for]="certificado">Certificado: </label>
+            <input type="file" id="certificado" name="certificado" [(ngModel)]="tituloUniversitario.certificado" formControlName="certificado">
+        </div>
+    </fieldset>
+    <div>
+        <button (click)='guardarTituloUniversitario()' [disabled]="!tituloUniversitarioForm.valid">Guardar Título Universitario</button>
+    </div>
+</form>
+</div>
+
+
+<div *ngIf="tipoFormacion === 'Ciclos'">
+<form [formGroup]="cicloFormativoForm">
+    <!-- Opcion Ciclo Formativo -->
+    <fieldset>
+        <legend>Ciclo Formativo</legend>
+        <div>
+            <label [attr.for]="centroEducativo">Centro Educativo: </label>
+            <select name="centroEducativo" [(ngModel)]="cicloFormativo.centroEducativo" formControlName="centroEducativo">
+                <option *ngFor="let cent of centrosEducativos" [value]="cent.nombre">{{cent.nombre}}</option>
+                <!--
+                <option value="IES Laguna">IES Laguna</option>
+                <option value="IES Alonso Madrigal">IES Alonso Madrigal</option>
+                <option value="IES Vasco de la Zarza">IES Vasco de la Zarza</option>
+                <option value="IES Jorge Santayana">IES Jorge Santayana</option>
+                -->
+            </select>
+        </div>
+        <div [hidden]="cicloFormativoForm.controls['centroEducativo'].valid || cicloFormativoForm.controls['centroEducativo'].untouched">
+            <div [hidden]="!cicloFormativoForm.controls['centroEducativo'].hasError('required')">El 'Centro Educativo' es obligatorio</div>
+        </div>
+
+        <div>
+            <label [attr.for]="familiaProfesional">Familia Profesional: </label>
+            <select name="familiaProfesional" [(ngModel)]="cicloFormativo.familiaProfesional" formControlName="familiaProfesional">
+                <option *ngFor="let famil of familiasProfesionales" [value]="famil.nombre">{{famil.nombre}}</option>
+                <!--
+                <option value="Informática y Comunicaciones">Informática y Comunicaciones</option>
+                <option value="Instalación y Mantenimiento">Instalación y Mantenimiento</option>
+                <option value="Madera, Mueble y Corcho">Madera, Mueble y Corcho</option>
+                <option value="Química">Química</option>
+                <option value="Sanidad">Sanidad</option>-->
+            </select>
+        </div>
+        <div [hidden]="cicloFormativoForm.controls['familiaProfesional'].valid || cicloFormativoForm.controls['familiaProfesional'].untouched">
+            <div [hidden]="!cicloFormativoForm.controls['familiaProfesional'].hasError('required')">La 'Familia Profesional' es obligatoria</div>
+        </div>
+
+        <div>
+            <label [attr.for]="grado">Grado: </label>
+            <select name="grado" [(ngModel)]="cicloFormativo.grado" formControlName="grado">
+                <option *ngFor="let grad of grados" [value]="grad.nombre">{{grad.nombre}}</option>
+                <!--
+                <option value="Superior">Grado Superior</option>
+                <option value="Medio">Grado Medio</option>
+                <option value="FPBasica">FP Básica</option>-->
+            </select>
+        </div>
+        <div [hidden]="cicloFormativoForm.controls['grado'].valid || cicloFormativoForm.controls['grado'].untouched">
+            <div [hidden]="!cicloFormativoForm.controls['grado'].hasError('required')">El 'Grado' es obligatorio</div>
+        </div>
+
+
+        <div>
+            <label [attr.for]="ciclo">Ciclo: </label>
+            <select name="ciclo" [(ngModel)]="cicloFormativo.ciclo" formControlName="ciclo">
+                <option *ngFor="let cic of ciclos" [value]="cic.nombre">{{cic.nombre}}</option>
+                <!--
+                <option value="Desarrollo de Aplicaciones Web">Desarrollo de Aplicaciones Web</option>
+                <option value="Administración de Sistemas Informáticos en Red">Administración de Sistemas Informáticos en Red</option>
+                <option value="Desarrollo de Aplicaciones Multiplataforma">Desarrollo de Aplicaciones Multiplataforma</option>
+                <option value="Sistemas Microinformáticos y Redes">Sistemas Microinformáticos y Redes</option>
+                <option value="Audiología Protésica">Audiología Protésica</option>
+                <option value="Higiene Bucodental">Higiene Bucodental</option>
+                <option value="Laboratorio Clínico y Biomédico">Laboratorio Clínico y Biomédico</option>
+                -->
+            </select>
+        </div>
+        <div [hidden]="cicloFormativoForm.controls['ciclo'].valid || cicloFormativoForm.controls['ciclo'].untouched">
+            <div [hidden]="!cicloFormativoForm.controls['ciclo'].hasError('required')">El 'Ciclo' es obligatorio</div>
+        </div>
+
+
+        <div>
+            <label [attr.for]="fechaTituloCiclo">Fecha del Título: </label>
+            <input type="text" id="fechaTituloCiclo" name="fechaTitulo" [(ngModel)]="cicloFormativo.fechaTitulo" formControlName="fechaTitulo">
+        </div>
+
+        <div>
+            <label [attr.for]="dual">Formación Dual: </label>
+            <input type="checkbox" id="dual" value="dual" name="dual" [(ngModel)]="cicloFormativo.dual" formControlName="dual">
+        </div>
+
+        <div>
+            <label [attr.for]="bilingueCiclo">Formación Bilingue: </label>
+            <input type="checkbox" id="bilingueCiclo" value="bilingue" name="bilingueCiclo" [(ngModel)]="cicloFormativo.bilingue" formControlName="bilingue">
+        </div>
+
+        <div>
+            <label [attr.for]="certificadoCiclo">Certificado: </label>
+            <input type="file" id="certificadoCiclo" name="certificadoCiclo" [(ngModel)]="cicloFormativo.certificado" formControlName="certificado">
+        </div>
+    </fieldset>
+    <div>
+        <button (click)='guardarCicloFormativo()' [disabled]="!cicloFormativoForm.valid">Guardar Ciclo Formativo</button>
+    </div>
+
+</form>
+</div>

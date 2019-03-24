@@ -1,0 +1,136 @@
+<form [formGroup]="datosPersForm">
+
+    <fieldset>
+        <legend> Datos Personales </legend>
+      <div>
+            <label [attr.for]="nombre">Nombre: </label>
+            <input type="text" size="30" id="nombre" name="nombre" [(ngModel)]="profileStudent.nombre" formControlName="nombre">
+
+            <div [hidden]="datosPersForm.controls['nombre'].valid || datosPersForm.controls['nombre'].untouched">
+                  <div>
+                        Errores encontrados en el campo 'Nombre':
+                  </div>
+                  <div [hidden]="!datosPersForm.controls['nombre'].hasError('required')">
+                        Es obligatorio
+                  </div>
+                  <div [hidden]="!datosPersForm.controls['nombre'].hasError('minlength')">
+                        Longitud mínima de 3 caracteres
+                  </div>
+                  <div [hidden]="!datosPersForm.controls['nombre'].hasError('maxlength')">
+                        Longitud máxima de 55 caracteres
+                  </div>
+                  <div [hidden]="!datosPersForm.controls['nombre'].hasError('validateNombreApellido')">
+                        Formato erroneo: Sin espacios en blanco al principio ni al final, ni caracteres especiales
+                  </div>
+            </div>
+      </div>
+      <div>
+            <label [attr.for]="apellidos">Apellidos: </label>
+            <input type="text" size="30" id="apellidos" name="apellidos" [(ngModel)]="profileStudent.apellidos" formControlName="apellidos">
+
+            <div [hidden]="datosPersForm.controls['apellidos'].valid || datosPersForm.controls['apellidos'].untouched">
+                  <div>
+                        Errores encontrados en el campo 'Apellidos':
+                  </div>
+
+                  <div [hidden]="!datosPersForm.controls['apellidos'].hasError('required')">
+                        Es obligatorio
+                  </div>
+
+                  <div [hidden]="!datosPersForm.controls['apellidos'].hasError('minlength')">
+                        Longitud mínima de 3 caracteres
+                  </div>
+                  <div [hidden]="!datosPersForm.controls['apellidos'].hasError('maxlength')">
+                        Longitud máxima de 55 caracteres
+                  </div>
+                  <div [hidden]="!datosPersForm.controls['apellidos'].hasError('validateNombreApellido')">
+                        Formato erroneo: Sin espacios en blanco al principio ni al final, ni caracteres especiales
+                  </div>
+            </div>
+      </div>
+
+      <div>
+            <label [attr.for]="fechaNacimiento">F.Nacimiento: </label>
+            <input type="text" name="fechaNacimiento" [(ngModel)]="profileStudent.fechaNacimiento" formControlName="fechaNacimiento">
+      </div>
+
+
+      <div>
+            <label [attr.for]="tfnoContacto">Teléfono: </label>
+            <input type="text" name="tfnoContacto" [(ngModel)]="profileStudent.tfnoContacto" formControlName="tfnoContacto">
+      </div>
+      <div>
+            <label [attr.for]="tfnoAlternativo">Teléfono Alternativo: </label>
+            <input type="text" name="tfnoAlternativo" [(ngModel)]="profileStudent.tfnoAlternativo" formControlName="tfnoAlternativo">
+      </div>
+
+      <div>
+            <label [attr.for]="tipoDocumento">Tipo Documento: </label>
+            <select name="tipoDocumento" [(ngModel)]="profileStudent.tipoDocumento" formControlName="tipoDocumento">
+                  <option value="NIF/NIE">NIF/NIE</option>
+                  <option value="Otro">Otro</option>
+                  <option value="Pasaporte">Pasaporte</option>
+            </select>
+      </div>
+      <div>
+            <label [attr.for]="numDocumento">Número: </label>
+            <input type="text" name="numDocumento" [(ngModel)]="profileStudent.numDocumento" formControlName="numDocumento">
+
+            <div [hidden]="!datosPersForm.hasError('validateNIF_NIE')">
+                  Formato de NIF/NIE erróneo
+            </div>
+            <div [hidden]="!datosPersForm.hasError('validatePasaporte')">
+                  Formato de Pasaporte erróneo
+            </div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+            <legend> Dirección </legend>
+              <div formGroupName="direc">
+                    <div>
+                          <label [attr.for]="direccion">Dirección: </label>
+                          <input type="text" size="50" name="direccion" [(ngModel)]="profileStudent.direccion" formControlName="direccion">
+                    </div>
+
+                    <div>
+                          <label [attr.for]="provincia">Provincia: </label>
+                          <select name="provincia" [(ngModel)]="profileStudent.provincia" formControlName="provincia">
+                                <option *ngFor="let prov of provincias" [value]="prov.nombre">{{prov.nombre}}</option>
+                          </select>
+
+                          <label [attr.for]="municipio">Municipio: </label>
+                          <select name="municipio" [(ngModel)]="profileStudent.municipio" formControlName="municipio">
+                              <option *ngFor="let mun of municipios" [value]="mun.nombre">{{mun.nombre}}</option>
+                          </select>
+                    </div>
+              </div>
+    </fieldset>
+
+
+    <fieldset>
+            <legend> Más información </legend>
+              <div formGroupName="masDatos">
+                    <div>
+                          <label [attr.for]="permisosConducir">Permisos de conducir: </label>
+                          <input type="text" name="permisosConducir" [(ngModel)]="profileStudent.permisosConducir" formControlName="permisosConducir">
+                    </div>
+
+                    <div>
+                          <label [attr.for]="sobreMi">Sobre mi: </label>
+                          <textarea name="sobreMi" [(ngModel)]="profileStudent.sobreMi" formControlName="sobreMi"></textarea>
+                    </div>
+
+                    <div>
+                          <label [attr.for]="otrasCompetencias">Otras competencias: </label>
+                          <textarea name="otrasCompetencias" [(ngModel)]="profileStudent.otrasCompetencias" formControlName="otrasCompetencias"></textarea>
+                    </div>
+              </div>
+        </fieldset>
+
+      <div>
+            <button (click)='guardar()' [disabled]="!datosPersForm.valid">Guardar</button>
+      </div>
+
+
+</form>

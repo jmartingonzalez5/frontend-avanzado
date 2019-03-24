@@ -1,0 +1,60 @@
+<h3>Oferta de trabajo de la empresa {{jobOffer.empresa}}</h3>
+
+
+<form [formGroup]="jobOfferDetalleForm">
+
+  <fieldset>
+    <legend> Oferta </legend>
+    <div>
+      <label [attr.for]="empresa">Empresa: </label>
+      <input type="text" size="40" id="empresa" name="empresa" formControlName="empresa">
+    </div>
+    <div>
+      <label [attr.for]="puesto">Puesto: </label>
+      <input type="text" size="50" id="puesto" name="puesto" formControlName="puesto">
+    </div>
+    <div>
+      <label [attr.for]="descripcion">Descripción: </label>
+      <textarea id="descripcion" name="descripcion" formControlName="descripcion"></textarea>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend> Lugar </legend>
+    <div>
+      <label [attr.for]="provincia">Provincia: </label>
+      <input type="text" size="40" id="provincia" name="provincia" formControlName="provincia">
+    </div>
+    <div>
+      <label [attr.for]="municipio">Municipio: </label>
+      <input type="text" size="40" id="municipio" name="municipio" formControlName="municipio">
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend> Destinado a personas de  </legend>
+    <div>
+      <label [attr.for]="familiaProfesional">Familia Profesional: </label>
+      <input type="text" size="50" id="familiaProfesional" name="familiaProfesional" formControlName="familiaProfesional">
+    </div>
+    <div *ngIf="ciclosDeLaFamiliaProfesional.length>0">
+      <table>
+        <tr><th> Títulos a los que va destinada la oferta </th></tr>
+        <tr *ngFor="let cic of ciclosDeLaFamiliaProfesional">
+          <td>{{cic}}</td>
+        </tr>
+      </table>
+    </div>
+
+  </fieldset>
+
+
+  <div>
+    <button (click)='inscripcionOferta()'>Inscribirse a la oferta</button>
+  </div>
+
+  <div>
+    <button [routerLink]="['/user/offers']"> Volver a Ofertas </button>
+  </div>
+
+</form>

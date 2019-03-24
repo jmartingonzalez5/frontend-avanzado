@@ -1,0 +1,122 @@
+
+<div>
+  <button [routerLink]="['/user/dashboard']"> Volver al Dashboard </button>
+</div>
+
+<h2> Datos Personales </h2>
+
+<div> {{profileStudent.nombre}} {{profileStudent.apellidos}} </div>
+
+<div>
+  <div>
+    <span> Email: </span>
+    <span> {{student.email}} </span>
+  </div>
+  <div>
+    <span> Fecha de Nacimiento: </span>
+    <span> {{profileStudent.fechaNacimiento}} </span>
+  </div>
+  <div>
+    <span> Teléfono de Contacto: </span>
+    <span> {{profileStudent.tfnoContacto}} </span>
+  </div>
+  <div>
+    <span> {{profileStudent.tipoDocumento}}: </span>
+    <span> {{profileStudent.numDocumento}} </span>
+  </div>
+  <div>
+    <span> Permisos de conducir: </span>
+    <span> {{profileStudent.permisosConducir}} </span>
+  </div>
+</div>
+
+<div>
+  <p> Acerca de mí ....</p>
+  <textarea>{{profileStudent.sobreMi}}</textarea>
+</div>
+
+<div>
+  <p> Otras competencias ....</p>
+  <textarea>{{profileStudent.otrasCompetencias}}</textarea>
+</div>
+
+<div>
+  <button [routerLink]="['/user/profile/profile-student/datos-personales-form']"> Modificar Datos Personales </button>
+</div>
+
+
+<h2> Formación Académica</h2>
+<table>
+  <tr>
+    <th> Nivel </th>
+    <th> Título </th>
+    <th> Centro </th>
+    <th> Fecha </th>
+    <th> Certificado </th>
+  </tr>
+  <tr *ngFor="let titUniv of profileStudent.titulosUniversitarios">
+    <td> Universidad </td>
+    <td> {{titUniv.titulo}} </td>
+    <td> {{titUniv.centro}} </td>
+    <td> {{titUniv.fechaTitulo}} </td>
+    <td> {{titUniv.certificado}}</td>
+  </tr>
+  <tr *ngFor="let cicloForm of profileStudent.ciclosFormativos">
+    <td> Ciclos Formativos </td>
+    <td> {{cicloForm.ciclo}} </td>
+    <td> {{cicloForm.centroEducativo}} </td>
+    <td> {{cicloForm.fechaTitulo}} </td>
+    <td> {{cicloForm.certificado}}</td>
+  </tr>
+</table>
+
+
+<div>
+  <button [routerLink]="['/user/profile/profile-student/formac-academica-tabla']"> Modificar Formación Académica </button>
+</div>
+
+
+
+
+
+
+
+<h2> Experiencia Laboral </h2>
+<table>
+  <tr>
+    <th> Empresa </th>
+    <th> Puesto </th>
+    <th> Fechas </th>
+  </tr>
+  <tr *ngFor="let exper of profileStudent.experienciaLaboral">
+    <td> {{exper.nombreEmpresa}} </td>
+    <td> {{exper.puesto}} </td>
+    <td> {{exper.fechaInicio}} - {{exper.fechaFin}}</td>
+  </tr>
+</table>
+
+<div>
+  <button [routerLink]="['/user/profile/profile-student/exper-laboral-tabla']"> Modificar Experiencia Laboral </button>
+</div>
+
+
+
+
+<h2> Idiomas </h2>
+<table>
+  <tr>
+    <th> Idioma </th>
+    <th> Nivel </th>
+    <th> Fecha </th>
+  </tr>
+  <tr *ngFor="let idiomaStudent of profileStudent.idiomas">
+    <td *ngIf="idiomaStudent.idioma"> {{idiomaStudent.idioma}} </td>
+    <td *ngIf="idiomaStudent.otroIdioma"> {{idiomaStudent.otroIdioma}} </td>
+    <td> {{idiomaStudent.nivel}} </td>
+    <td> {{idiomaStudent.fecha}}</td>
+  </tr>
+</table>
+
+<div>
+  <button [routerLink]="['/user/profile/profile-student/idiomas-tabla']"> Modificar Idiomas </button>
+</div>
