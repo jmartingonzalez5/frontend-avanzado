@@ -2,16 +2,16 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 export class BasicValidators {
 
-  // VALIDACIÓN DE LOS CAMPOS EMAIL:
-  static email (control: FormControl){
+    // VALIDACIÓN DE LOS CAMPOS EMAIL:
+    static email (control: FormControl){
 
-    let EMAIL_REGEXP = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return EMAIL_REGEXP.test(control.value) ? null : {
-        validateEmail: {
-              valid: false
-        }
-      };
-  }
+        let EMAIL_REGEXP = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return EMAIL_REGEXP.test(control.value) ? null : {
+            validateEmail: {
+                valid: false
+            }
+        };
+    }
 
     // VALIDACIÓN DE NOMBRES, APELLIDOS, ....
     static nombreApellido (control: FormControl){
@@ -35,13 +35,13 @@ export class BasicValidators {
             // Formato NIF:
             //      8 números y una letra
             //           La letra tiene que ser una de las siguientes: (TRWAGMYFPDXBNJZSQVHLCKE)
-            let NIF_REGEXP = /^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/;
+            let NIF_REGEXP = /^[0-9]{8}[TtRrWwAaGgMmYyFfPpDdXxBbNnJjZzSsQqVvHhLlCcKkEe]$/;
 
             // Formato NIE:
             //      1 letra, 7 números y 1 letra
             //        La primera letra tiene que ser una de las siguientes: XYZ
             //        La última letra tiene que ser una de las siguientes: TRWAGMYFPDXBNJZSQVHLCKE
-            let NIE_REGEXP = /^[XYZ][0-9]{7}[TRWAGMYFPDXBNJZSQVHLCKE]$/;
+            let NIE_REGEXP = /^[XYZ][0-9]{7}[TtRrWwAaGgMmYyFfPpDdXxBbNnJjZzSsQqVvHhLlCcKkEe]$/;
 
 
             // Formato Pasaporte:

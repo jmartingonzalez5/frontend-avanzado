@@ -1,4 +1,5 @@
 export class Municipio {
-  id: string;
-  nombre: string;
+    id: string;
+    idProvincia: string;
+    nombre: string;
 }

@@ -8,11 +8,12 @@ import {ProvinciasService} from '../../../../shared/services/provincias.service'
 import {Provincia} from '../../../../shared/models/provincia';
 import {Municipio} from '../../../../shared/models/municipio';
 import {MunicipiosService} from '../../../../shared/services/municipios.service';
+import {FamiliaProfesional} from '../../../../shared/models/familiaProfesional';
 
 @Component({
-  selector: 'app-datos-personales-form',
-  templateUrl: './datos-personales-form.component.html',
-  styleUrls: ['./datos-personales-form.component.scss']
+    selector: 'app-datos-personales-form',
+    templateUrl: './datos-personales-form.component.html',
+    styleUrls: ['./datos-personales-form.component.scss']
 })
 export class DatosPersonalesFormComponent implements OnInit {
 
@@ -61,9 +62,16 @@ export class DatosPersonalesFormComponent implements OnInit {
     }
 
     getMunicipios() {
+        /*
         this.municipiosService.getMunicipios().subscribe(data => {
             this.municipios = data;
         });
+        */
+        this.actualizarListaMunicipios();
+    }
+
+    actualizarListaMunicipios(){
+        this.municipios = this.provincias.find(x=>x.nombre === this.datosPersForm.get('direc.provincia').value).municipios;
     }
 
     getProfileStudent(){
