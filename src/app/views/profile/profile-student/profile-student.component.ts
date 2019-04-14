@@ -1,36 +1,36 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {User} from '../../../shared/models/user';
-import {ProfileStudent} from '../../../shared/models/profileStudent';
-import {ProfileStudentsService} from '../../../shared/services/profileStudents.service';
-import {Router} from '@angular/router';
+import { Component } from '@angular/core';
+import { ProfileService } from '../../../shared/services/profile.service';
+import { User } from 'src/app/shared/models/user.model';
 
 @Component({
   selector: 'app-profile-student',
   templateUrl: './profile-student.component.html',
   styleUrls: ['./profile-student.component.scss']
 })
-export class ProfileStudentComponent implements OnInit {
+export class ProfileStudentComponent {
+  user: User;
+  constructor(private profileService: ProfileService) {
+    this.user = this.profileService.user;
+  }
 
-    @Input() student: User;
-
-    profileStudent: ProfileStudent;
-
-    constructor(private router: Router, private profileStudentsService: ProfileStudentsService) { }
-
-    ngOnInit() {
-        this.getProfileStudentLogueado();
+  deleteStudy(studyID: number) {
+    const studies = this.user.studies;
+    const index = studies.findIndex(study => study.uid === studyID);
+    if (index === -1) {
+      alert('Error: Study not found');
+      return;
     }
-
-    getProfileStudentLogueado(){
-        this.profileStudentsService.getProfileStudentLogueado().subscribe( data => {
-            this.profileStudent = data;
-
-            if (typeof this.profileStudent === 'undefined'){
-                // Redirigir a login:
-                this.router.navigate(['/signin']);
-            }
-        });
-
+    studies.splice(index, 1);
+    this.profileService.updateProfile(this.user);
+  }
+  deleteLanguage(languageID: any) {
+    const languages = this.user.languages;
+    const index = languages.findIndex(language => language.uid === languageID);
+    if (index === -1) {
+      alert('Error: Language not found');
+      return;
     }
-
+    languages.splice(index, 1);
+    this.profileService.updateProfile(this.user);
+  }
 }

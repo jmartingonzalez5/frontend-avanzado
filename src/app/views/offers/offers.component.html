@@ -1,8 +1,6 @@
-<div class="row" *ngIf="userLogueado.rol==='student'" >
-  <app-job-offers-student [student]='userLogueado'></app-job-offers-student>
-</div>
+<h2>
+  Offers
+</h2>
 
-
-<div class="row" *ngIf="userLogueado.rol==='company'" >
-  <app-job-offers-company [company]='userLogueado'></app-job-offers-company>
-</div>
+<app-offers-list *ngIf="isOffersList"></app-offers-list>
+<app-offers-profile *ngIf="!isOffersList"></app-offers-profile>

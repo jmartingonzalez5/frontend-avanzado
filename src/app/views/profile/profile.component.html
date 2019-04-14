@@ -1,16 +1,11 @@
+<h2>
+  Profile
+</h2>
+<!-- <div *ngIf="userRol === 'student'"> -->
+<app-profile-student> </app-profile-student>
+<!-- </div> -->
 
-
-<!-- <div class="row" *ngIf="userLogueado.rol===AppSettings.STUDENT_ROL.value" > -->
-
-<div class="row" *ngIf="userLogueado.rol==='student'" >
-      <app-profile-student [student]='userLogueado'></app-profile-student>
-</div>
-
-
-
-<!-- <div class="row" *ngIf="userLogueado.rol===AppSettings.COMPANY_ROL.value" > -->
-
-<div class="row" *ngIf="userLogueado.rol==='company'" >
-      <app-profile-company [company]='userLogueado'></app-profile-company>
-</div>
-
+<!-- <div *ngIf="userRol === 'company'">
+	<app-profile-company> </app-profile-company>
+	
+</div> -->
