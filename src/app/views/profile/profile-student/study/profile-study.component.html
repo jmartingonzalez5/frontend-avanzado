@@ -6,7 +6,7 @@
   >
     <option selected>---</option>
 
-    <option [ngValue]="option" *ngFor="let option of options">{{
+    <option [ngValue]="option" *ngFor="let option of options$ | async">{{
       option.name
     }}</option>
   </select>

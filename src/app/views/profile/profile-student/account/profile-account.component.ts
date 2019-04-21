@@ -1,16 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ProfileService } from '../../../../shared/services/profile.service';
-import { MockData } from 'src/app/shared/mock-data';
+
 import { dateValidator } from 'src/app/shared/directives/date-validator.directive';
 import {
-  User,
-  DocumentType,
-  Municipe,
-  Province
+  User
 } from 'src/app/shared/models/user.model';
 import { documentNumberValidator } from 'src/app/shared/directives/document-number-validator.directive';
+import {select, Store} from '@ngrx/store';
+import {selectUserProfile} from '../../../../shared/store/selectors/userProfile.selector';
+import {IAppState} from '../../../../shared/store/state/app.state';
+import {SaveProfile} from '../../../../shared/store/actions/userProfile.actions';
+import {selectDocumentTypeList} from '../../../../shared/store/selectors/general/documentType.selector';
+import {selectMunicipesList} from '../../../../shared/store/selectors/general/municipe.selector';
+import {selectProvincesList} from '../../../../shared/store/selectors/general/province.selector';
 
 @Component({
   selector: 'app-profile-account',
@@ -19,81 +22,80 @@ import { documentNumberValidator } from 'src/app/shared/directives/document-numb
 })
 export class ProfileAccountComponent implements OnInit {
   rForm: FormGroup;
-  user: User;
-  documentsType: DocumentType[];
-  municipes: Municipe[];
-  provinces: Province[];
 
-  constructor(private router: Router, private profileService: ProfileService) {
-    this.user = this.profileService.user;
+  userProfile$ = this._store.pipe(select(selectUserProfile));
+  documentsType$  = this._store.pipe(select(selectDocumentTypeList));
+  municipes$  = this._store.pipe(select(selectMunicipesList));
+  provinces$  = this._store.pipe(select(selectProvincesList));
+  userProfile: User;
+
+  constructor(private _store: Store<IAppState>, private router: Router) {
+      this.userProfile$.subscribe(userProfile => this.userProfile = userProfile);
+
   }
+
   ngOnInit() {
-    this.loadSelectProperties();
-    this.loadFormInstance();
+        this.loadFormInstance();
   }
-  public loadSelectProperties(): void {
-    this.documentsType = MockData.DOCUMENTS_TYPE;
-    this.municipes = MockData.MUNICIPES;
-    this.provinces = MockData.PROVINCES;
-  }
+
 
   public loadFormInstance(): void {
     this.rForm = new FormGroup(
       {
-        name: new FormControl(this.user.name, [
+        name: new FormControl(this.userProfile.name, [
           Validators.required,
           Validators.minLength(3),
           Validators.maxLength(55),
           Validators.pattern(/^[a-zA-Z]+$/)
         ]),
-        surname: new FormControl(this.user.surname, [
+        surname: new FormControl(this.userProfile.surname, [
           Validators.required,
           Validators.minLength(3),
           Validators.maxLength(55),
           Validators.pattern(/^[a-zA-Z]+$/)
         ]),
-        phone: new FormControl(this.user.phone, [
+        phone: new FormControl(this.userProfile.phone, [
           Validators.pattern(/^[0-9]{6,}$/),
           Validators.required
         ]),
-        phone2: new FormControl(this.user.phone2, [
+        phone2: new FormControl(this.userProfile.phone2, [
           Validators.pattern(/^[0-9]{6,}$/),
           Validators.required
         ]),
 
-        birthdate: new FormControl(this.user.birthdate, [
+        birthdate: new FormControl(this.userProfile.birthdate, [
           Validators.required,
           dateValidator()
         ]),
-        documentType: new FormControl(this.user.documentType, [
+        documentType: new FormControl(this.userProfile.documentType, [
           Validators.required
         ]),
-        documentNumber: new FormControl(this.user.documentNumber, [
+        documentNumber: new FormControl(this.userProfile.documentNumber, [
           Validators.required
         ]),
-        street: new FormControl(this.user.address.street, [
+        street: new FormControl(this.userProfile.address.street, [
           Validators.required
         ]),
-        municipe: new FormControl(this.user.address.municipe, [
+        municipe: new FormControl(this.userProfile.address.municipe, [
           Validators.required
         ]),
-        province: new FormControl(this.user.address.province, [
+        province: new FormControl(this.userProfile.address.province, [
           Validators.required
         ]),
-        aboutMe: new FormControl(this.user.aboutMe),
-        otherCompetences: new FormControl(this.user.aboutMe),
-        license: new FormControl(this.user.license)
+        aboutMe: new FormControl(this.userProfile.aboutMe),
+        otherCompetences: new FormControl(this.userProfile.aboutMe),
+        license: new FormControl(this.userProfile.license)
       },
       documentNumberValidator()
     );
   }
 
   public save() {
-    const user = { ...this.profileService.user, ...this.rForm.value };
-    this.profileService.user = user;
-    this.profileService.updateProfile(user);
-    this.router.navigate(['/admin/profile']);
+        const user = { ...this.userProfile, ...this.rForm.value };
+        this._store.dispatch(new SaveProfile(user));
+        this.router.navigate(['admin/profile']);
   }
+
   compareByUID(option1, option2) {
     return option1.uid === (option2 && option2.uid);
   }

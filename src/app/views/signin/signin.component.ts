@@ -3,6 +3,10 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SigninService } from './signin.service';
 import { ProfileService } from 'src/app/shared/services/profile.service';
+import {Store} from '@ngrx/store';
+import {IAppState} from '../../shared/store/state/app.state';
+import {GetMockUser, GetUsers, Login} from '../../shared/store/actions/auth.actions';
+
 
 @Component({
   selector: 'app-signin',
@@ -18,7 +22,8 @@ export class SigninComponent implements OnInit {
     private signinService: SigninService,
     private profileService: ProfileService,
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private _store: Store<IAppState>
   ) {}
 
   ngOnInit() {
@@ -26,18 +31,16 @@ export class SigninComponent implements OnInit {
       email: ['', [Validators.email, Validators.required]],
       password: ['', Validators.required]
     });
+
+    // Inicializar la lista de usuarios:
+      this._store.dispatch(new GetUsers());
   }
 
   onSubmit() {
-    this.submitted = true;
+      this.submitted = true;
 
-    this.signinService.login({ ...this.loginForm.value }).then(user => {
-      if (!user) {
-        this.errorLogin = true;
-        return;
-      }
-      this.profileService.user = user;
-      this.router.navigate(['admin/dashboard']);
-    });
+      // this.store.dispatch(new GetMockUser());
+      this._store.dispatch(new Login({ email: this.loginForm.controls['email'].value, password: this.loginForm.controls['password'].value}));
+
   }
 }

@@ -4,6 +4,12 @@ import { SigninService } from 'src/app/views/signin/signin.service';
 import { HttpClient } from '@angular/common/http';
 import { AppSettings } from '../../app.settings';
 import { OffersService } from '../../services/offers.service';
+import {Router} from '@angular/router';
+import {Store} from '@ngrx/store';
+import {IAppState} from '../../store/state/app.state';
+import {GetUsers, Logout} from '../../store/actions/auth.actions';
+import {Validators} from '@angular/forms';
+
 
 @Component({
   selector: 'app-admin-layout',
@@ -20,24 +26,23 @@ export class AdminLayoutComponent {
   constructor(
     private profileService: ProfileService,
     private offersService: OffersService,
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router,
+    private _store: Store<IAppState>
   ) {
-      // LO COMENTO YO. NO SE PARA QUÉ HACE FALTA !!!
 
-    /*
     this.login({ email: 'carlos.caballero@gmail.com', password: '1234' }).then(
       user => {
         this.profileService.user = user;
       }
-    );*/
+    );
 
     this.offersService.getOffers().subscribe(offers => {
       this.offersService.offers = offers;
     });
   }
 
-    // LO COMENTO YO.
-/*
+
   getUsers() {
     return this.http.get<any>(AppSettings.API_ENDPOINT_USERS).toPromise();
   }
@@ -49,6 +54,11 @@ export class AdminLayoutComponent {
       (user: any) => user.email === email && user.password === password
     );
   }
-  */
 
+
+
+  buttonLogout(){
+      this._store.dispatch(new Logout());
+
+  }
 }

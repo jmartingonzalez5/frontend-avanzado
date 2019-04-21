@@ -1,2 +1,16 @@
 <!-- <app-menu></app-menu> -->
 
+    <!--
+       EJEMPLO DE RECUPERACION DE INFORMACION DEL STORE:
+
+    <tr *ngFor="let doc of documentTypes$ | async">
+        <td>{{ doc.uid }}</td>
+        <td>{{ doc.name }}</td>
+    </tr>
+    </table>
+
+    <p> {{ (user$ | async)?.username }} </p>
+
+    -->
+    <p> Signin User: {{ (user$ | async)?.username }} </p>
+    <p> Rol: {{ (user$ | async)?.roles[0] }} </p>

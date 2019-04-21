@@ -7,7 +7,7 @@
       name="level"
       formControlName="level"
     >
-      <option [ngValue]="level" *ngFor="let level of languageLevels">
+      <option [ngValue]="level" *ngFor="let level of languageLevels$ | async">
         {{ level.name }}</option
       >
     </select>
@@ -21,7 +21,7 @@
       formControlName="name"
       [compareWith]="compareName"
     >
-      <option [ngValue]="name" *ngFor="let name of languageNames">
+      <option [ngValue]="name" *ngFor="let name of languageNames$ | async">
         {{ name.name }}</option
       >
     </select>

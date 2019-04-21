@@ -7,7 +7,7 @@
       name="institution"
       formControlName="institution"
     >
-      <option [ngValue]="institution" *ngFor="let institution of institutions">
+      <option [ngValue]="institution" *ngFor="let institution of institutions$ | async">
         {{ institution.name }}</option
       >
     </select>
@@ -20,7 +20,7 @@
       formControlName="category"
       [compareWith]="compareCategory"
     >
-      <option [ngValue]="category" *ngFor="let category of categories">
+      <option [ngValue]="category" *ngFor="let category of categories$ | async">
         {{ category.name }}</option
       >
     </select>
@@ -34,7 +34,7 @@
       formControlName="grade"
       [compareWith]="compareGrade"
     >
-      <option [ngValue]="grade" *ngFor="let grade of grades">
+      <option [ngValue]="grade" *ngFor="let grade of grades$ | async">
         {{ grade.name }}</option
       >
     </select>
@@ -48,7 +48,7 @@
       formControlName="title"
       [compareWith]="compareTitle"
     >
-      <option [ngValue]="title" *ngFor="let title of titles">
+      <option [ngValue]="title" *ngFor="let title of titles$ | async">
         {{ title.name }}</option
       >
     </select>

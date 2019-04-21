@@ -24,6 +24,7 @@ export class Institution {
   uid: number;
   name: string;
 }
+
 export class Category {
   uid: number;
   name: string;

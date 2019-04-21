@@ -3,6 +3,8 @@ import { Study, VocationalStudy, CollegeStudy } from './study.model';
 import { Language } from './language.model';
 import { Offer } from './offer.model';
 import { Experience } from './experience.model';
+//import { IDocumentType, IMunicipe, IProvince } from './app.model';
+
 export interface Users {
   [id: number]: User;
 }
@@ -12,6 +14,10 @@ export interface UserAddress {
   province: Province;
   municipe: Municipe;
 }
+
+
+    // AHORA SON EXPORTADAS POR APP.MODEL (TODOS LOS DATOS GENERALES)
+
 export interface DocumentType {
   uid: number;
   name: string;
@@ -24,6 +30,8 @@ export interface Province {
   uid: number;
   name: string;
 }
+
+
 export interface User {
   password: string; // Only for mock
   id: number;
@@ -33,7 +41,6 @@ export interface User {
   birthdate: string;
   phone: string;
   phone2: string;
-
   email: string;
   documentNumber: string;
   documentType: DocumentType;

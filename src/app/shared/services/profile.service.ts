@@ -30,7 +30,8 @@ export class ProfileService {
   }
 
   public updateProfile(profile: any /* User */): Observable<any /* User */> {
-    return this.http.put<any>(AppSettings.API_ENDPOINT_USERS, { ...profile });
+    this.http.put<any>(AppSettings.API_ENDPOINT_USERS, { ...profile });
+    return of(profile);
   }
 
   public signupProfile(profile: any /* UserOptions */): Observable<boolean> {

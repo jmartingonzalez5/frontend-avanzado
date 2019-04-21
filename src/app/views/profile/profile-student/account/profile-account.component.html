@@ -54,7 +54,7 @@
     >
       <option
         [ngValue]="documentType"
-        *ngFor="let documentType of documentsType"
+        *ngFor="let documentType of documentsType$ | async"
       >
         {{ documentType.name }}</option
       >
@@ -86,7 +86,7 @@
       name="province"
       formControlName="province"
     >
-      <option [ngValue]="province" *ngFor="let province of provinces">
+      <option [ngValue]="province" *ngFor="let province of provinces$ | async">
         {{ province.name }}</option
       >
     </select>
@@ -99,7 +99,7 @@
       name="municipe"
       formControlName="municipe"
     >
-      <option [ngValue]="municipe" *ngFor="let municipe of municipes">
+      <option [ngValue]="municipe" *ngFor="let municipe of municipes$ | async">
         {{ municipe.name }}</option
       >
     </select>
