@@ -1,22 +1,24 @@
-/* import * as moment from 'moment'; */
+/*import * as moment from 'moment';*/
 export class AppSettings {
   public static readonly APP_NAME = 'PoliJob';
   public static readonly APP_LOCALSTORAGE_TOKEN = 'PoliJob_Token';
   public static readonly APP_VERSION = '0.1.0';
-
   public static readonly API_ENDPOINT = 'api/';
-
   public static readonly STATIC_ENDPOINT = AppSettings.API_ENDPOINT + 'static/';
   public static readonly STATIC_AVATAR_ENDPOINT =
     AppSettings.STATIC_ENDPOINT + 'images/avatar/';
-
   public static readonly API_ENDPOINT_APP = AppSettings.API_ENDPOINT + 'app/';
   public static readonly API_ENDPOINT_USER = AppSettings.API_ENDPOINT + 'user';
-  public static readonly API_ENDPOINT_USERS = AppSettings.API_ENDPOINT + 'users';
-  public static readonly API_ENDPOINT_OFFERS = AppSettings.API_ENDPOINT + 'offers';
-  public static readonly API_ENDPOINT_USER_ME = AppSettings.API_ENDPOINT + 'user-me';
-  public static readonly API_ENDPOINT_USER_CREATE = AppSettings.API_ENDPOINT_USER + '/create';
-  public static readonly API_ENDPOINT_CONFIRM_USER =  AppSettings.API_ENDPOINT_USER + '/confirm-user';
+  public static readonly API_ENDPOINT_USERS =
+    AppSettings.API_ENDPOINT + 'users';
+  public static readonly API_ENDPOINT_OFFERS =
+    AppSettings.API_ENDPOINT + 'offers';
+  public static readonly API_ENDPOINT_USER_ME =
+    AppSettings.API_ENDPOINT + 'user-me';
+  public static readonly API_ENDPOINT_USER_CREATE =
+    AppSettings.API_ENDPOINT_USER + '/create';
+  public static readonly API_ENDPOINT_CONFIRM_USER =
+    AppSettings.API_ENDPOINT_USER + '/confirm-user';
   public static readonly API_ENDPOINT_USER_REMEMBER_PASSWORD =
     AppSettings.API_ENDPOINT_USER + '/remember-password';
   public static readonly API_ENDPOINT_USER_REQUEST_REMEMBER_PASSWORD =
@@ -107,11 +109,18 @@ export class AppSettings {
       user.uid
     }/${hash}${size}.${extension}`;
   }
-  /*  public static getDateFormatted(date: moment.Moment | string) {
+  /*
+  public static getDateFormatted(date: moment.Moment | string) {
     let dateFormatted = date;
     if (typeof date === 'string') {
       dateFormatted = moment(date, 'X');
     }
     return (dateFormatted as moment.Moment).format(this.FORMAT_DATE);
-  } */
+  }
+*/
+    public static convertDate(inputFormat) {
+        function pad(s) { return (s < 10) ? '0' + s : s; }
+        var d = new Date(inputFormat);
+        return [pad(d.getDate()), pad(d.getMonth()), d.getFullYear()].join('/');
+    }
 }

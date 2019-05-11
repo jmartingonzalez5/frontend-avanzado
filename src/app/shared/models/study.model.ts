@@ -3,7 +3,7 @@ export class Study {
   level: LevelStudy;
   title: TitleStudy;
   certificate: boolean; //Sera un fichero
-  date: string;
+  date: Date;
   bilingue: boolean;
 }
 
@@ -24,7 +24,6 @@ export class Institution {
   uid: number;
   name: string;
 }
-
 export class Category {
   uid: number;
   name: string;

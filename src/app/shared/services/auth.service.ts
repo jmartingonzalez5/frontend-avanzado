@@ -1,29 +1,16 @@
 import { Injectable } from '@angular/core';
-import {from, Observable, of} from 'rxjs';
-import { MockData } from '../mock-data';
+import { HttpClient } from '@angular/common/http';
+import { Observable, of } from 'rxjs';
+import { TokenResponse } from '../models/token.interface';
+import { AppSettings } from '../app.settings';
 
-import {DocumentType, Municipe, Province, User} from '../models/user.model';
-import { Institution, Category, Grade, TitleStudy, LevelStudy } from '../models/study.model';
-import {LanguageLevel, LanguageName} from '../models/language.model';
-import {AppSettings} from '../app.settings';
-import {HttpClient} from '@angular/common/http';
-
-
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable()
 export class AuthService {
+  constructor(private http: HttpClient) {}
 
-
-    constructor(private http: HttpClient) {}
-
-    getMockUser(): Observable <User>{
-        return of(MockData.USER);
-    }
-
-    getUsers(): Observable<User[]>{
-        return from(this.http.get<any>(AppSettings.API_ENDPOINT_USERS).toPromise());
-    }
+  login({ email, password }): Observable<any> {
+    //Mock - Should return a Token
+    return of(true);
+  }
 
 }
-

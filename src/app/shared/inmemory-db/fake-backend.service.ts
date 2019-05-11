@@ -9,7 +9,7 @@ export class FakeBackendService implements InMemoryDbService {
         username: 'carloscg',
         name: 'Carlos',
         surname: 'Caballero',
-        birthdate: '19/11/1984',
+        birthdate: new Date(1984, 11, 19),  // '19/11/1984',
         phone: '644039911',
         phone2: '690940321',
         email: 'carlos.caballero@gmail.com',
@@ -43,7 +43,7 @@ export class FakeBackendService implements InMemoryDbService {
               uid: 3,
               name: 'Ciclo Formativo de Grado Superior'
             },
-            date: '30/06/2005',
+            date: new Date(2005, 6, 30), // '30/06/2005',
             dual: false,
             bilingue: true,
             certificate: true
@@ -61,7 +61,7 @@ export class FakeBackendService implements InMemoryDbService {
               name: 'Técnico Superior en Desarrollo de Aplicaciones Web'
             },
             grade: { uid: 3, name: 'Ciclo Formativo de Grado Superior' },
-            date: '30/06/2007',
+            date: new Date(2007, 6, 30), // '30/06/2007',
             dual: true,
             bilingue: false,
             certificate: false
@@ -73,13 +73,13 @@ export class FakeBackendService implements InMemoryDbService {
             uid: 1,
             level: { uid: 5, name: 'C1' },
             name: { uid: 1, name: 'Inglés' },
-            date: '30/06/2005'
+            date: new Date(2005, 6, 30), // '30/06/2005'
           },
           {
             uid: 2,
             level: { uid: 4, name: 'B2' },
             name: { uid: 2, name: 'Francés' },
-            date: '30/06/1998'
+            date: new Date(1998, 6, 30), // '30/06/1998'
           }
         ],
         offers: []
@@ -130,7 +130,7 @@ export class FakeBackendService implements InMemoryDbService {
         },
         province: { uid: 1, name: 'Málaga' },
         municipe: { uid: 7, name: 'Estepona' },
-        date: '21/09/2006',
+        date: new Date(2006, 9, 21), // '21/09/2006',
         category: { uid: 2, name: 'Informática y Comunicaciones' },
         title: [
           { uid: 1, name: 'Desarrollo Aplicaciones Web' },
@@ -150,7 +150,7 @@ export class FakeBackendService implements InMemoryDbService {
         },
         province: { uid: 1, name: 'Málaga' },
         municipe: { uid: 8, name: 'Campanillas (PTA)' },
-        date: '21/09/2016',
+        date: new Date(2016, 9, 21), // '21/09/2016',
         category: { uid: 4, name: 'Comercio y Marketing' },
         title: [{ uid: 5, name: 'Gestión Comercial y Empresarial' }]
       },
@@ -167,7 +167,7 @@ export class FakeBackendService implements InMemoryDbService {
         },
         province: { uid: 5, name: 'Granada' },
         municipe: { uid: 9, name: 'Motril' },
-        date: '11/07/2016',
+        date: new Date(2016, 7, 11), // '11/07/2016',
         category: { uid: 2, name: 'Informática y Comunicaciones' },
         title: [{ uid: 4, name: 'Desarrollo Aplicaciones Multiplataforma' }]
       },
@@ -183,7 +183,7 @@ export class FakeBackendService implements InMemoryDbService {
         },
         province: { uid: 2, name: 'Sevilla' },
         municipe: { uid: 10, name: 'Osuna' },
-        date: '01/12/2015',
+        date: new Date(2015, 12, 1), // '01/12/2015',
         category: { uid: 5, name: 'Administración y Gestión' },
         title: [{ uid: 6, name: 'Empresariales' }]
       }

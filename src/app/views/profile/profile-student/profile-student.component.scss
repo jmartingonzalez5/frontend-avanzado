@@ -1,23 +1,8 @@
 
-
-#contenido{
-	padding-top:4em;
-}
-td{
-	padding-left:2em;
-}
-#foto-perfil, #datosPersonales{
-	width:25%;
-
+img{
+	border-radius: 50% !important;
 }
 
-#otra_info{
-	padding-left:3em;
-}
-
-#otra_info  div{
-	padding-left:1em;
-}
-h2{
-	margin-top:2em;
+section#idFotoPerfil > div{
+	text-align: center;
 }

@@ -1,20 +1,86 @@
-<h2>
-  Offers Detail
-</h2>
 
-<pre>{{ offer | json }} </pre>
+<div class="container">
 
-<button
-  *ngIf="!isSubscribe()"
-  class="btn btn-primary"
-  (click)="subscribeOffer()"
->
-  Inscribirse
-</button>
-<button
-  *ngIf="isSubscribe()"
-  class="btn btn-danger"
-  (click)="unsubscribeOffer()"
->
-  Eliminar oferta
-</button>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Offers Detail</mat-card-title>
+    </mat-card-header>
+
+    <div class="contentCard">
+        <div>
+          <mat-form-field appearance="standard">
+            <mat-label>Company</mat-label>
+            <input matInput type="text" placeholder="Company" id="Company" [readonly]="true"  class="form-control" value="{{offer.company.name}}">
+          </mat-form-field>
+        </div>
+
+
+        <div>
+            <mat-form-field appearance="standard">
+                <mat-label>Job Name</mat-label>
+                <input matInput type="text" placeholder="Job" id="Job" [readonly]="true"  class="form-control" value="{{offer.job.name}}">
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field appearance="standard">
+                <mat-label>Job Description</mat-label>
+                <input matInput type="text" placeholder="Job Description" id="JobDescription" [readonly]="true"  class="form-control" value="{{offer.job.description}}">
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field appearance="standard">
+                <mat-label>Province</mat-label>
+                <input matInput type="text" placeholder="Province" id="Province" [readonly]="true"  class="form-control" value="{{offer.province.name}}">
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field appearance="standard">
+                <mat-label>Municipe</mat-label>
+                <input matInput type="text" placeholder="Municipe" id="Municipe" [readonly]="true"  class="form-control" value="{{offer.municipe.name}}">
+            </mat-form-field>
+        </div>
+
+        <div>
+
+            <mat-form-field appearance="standard">
+                <mat-label>Date</mat-label>
+                <input matInput type="text" placeholder="Date" id="Date" [readonly]="true"  class="form-control" value="{{convertDate(offer.date)}}">
+            </mat-form-field>
+
+        </div>
+
+        <div>
+            <mat-form-field appearance="standard">
+                <mat-label>Category</mat-label>
+                <input matInput type="text" placeholder="Category" id="Category" [readonly]="true"  class="form-control" value="{{offer.category.name}}">
+            </mat-form-field>
+        </div>
+
+
+        <div>
+            <mat-form-field appearance="standard">
+                <mat-label>Title</mat-label>
+                <mat-list class="form-control">
+                    <ng-container *ngFor="let title of offer.title">
+                        <mat-list-item><i class="material-icons">book</i>{{title.name}}</mat-list-item>
+                    </ng-container>
+                </mat-list>
+                <input matInput type="text" placeholder="Category" [readonly]="true"  class="form-control" value=" ">
+            </mat-form-field>
+
+        </div>
+
+        <mat-card-actions fxLayout="row" fxLayoutAlign="space-between">
+          <button *ngIf="!isSubscribe()" mat-raised-button color="primary" type="button" (click)="subscribe()">
+              <i class="material-icons">folder_special</i>Inscribirse</button>
+          <button *ngIf="isSubscribe()" mat-raised-button color="primary" type="button" (click)="unsubscribe()">
+              <i class="material-icons">unsubscribe</i>Eliminar oferta</button>
+        </mat-card-actions>
+    </div>
+  </mat-card>
+</div>
+
+

@@ -1,43 +1,96 @@
-<form [formGroup]="rForm" (submit)="submit()">
-  <div class="form-group">
-    <label for="level">Nivel</label>
-    <select
-      [compareWith]="compareLevel"
-      class="col-sm-10 form-control"
-      name="level"
-      formControlName="level"
-    >
-      <option [ngValue]="level" *ngFor="let level of languageLevels$ | async">
-        {{ level.name }}</option
-      >
-    </select>
-  </div>
+<div class="container">
 
-  <div class="form-group">
-    <label for="name">Idioma</label>
-    <select
-      class="col-sm-10 form-control"
-      name="name"
-      formControlName="name"
-      [compareWith]="compareName"
-    >
-      <option [ngValue]="name" *ngFor="let name of languageNames$ | async">
-        {{ name.name }}</option
-      >
-    </select>
-  </div>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Idiomas</mat-card-title>
+    </mat-card-header>
 
-  <div class="form-group">
-    <label for="date">Fecha de obtención del título</label>
-    <input
-      type="text"
-      name="date"
-      class="col-sm-10 form-control"
-      formControlName="date"
-    />
-  </div>
+    <div class="contentCard">
+      <form [formGroup]="rForm" (submit)="submit()">
 
-  <button class="btn btn-primary" type="submit" [disabled]="rForm.invalid">
-    Guardar
-  </button>
-</form>
+
+        <div>
+          <mat-form-field appearance="standard">
+            <mat-label>Nivel</mat-label>
+
+            <mat-select
+                    [compareWith]="compareLevel"
+                    id="level"
+                    formControlName="level">
+              <mat-option [value]="level" *ngFor="let level of languageLevels">
+                {{level.name}}
+              </mat-option>
+            </mat-select>
+
+            <mat-hint align="end">Introduce el nivel</mat-hint>
+            <mat-error *ngIf="rForm.controls['level'].errors">{{getErrorMessageLevel()}}</mat-error>
+          </mat-form-field>
+        </div>
+
+
+        <div>
+          <mat-form-field appearance="standard">
+            <mat-label>Idioma</mat-label>
+
+            <mat-select
+                    [compareWith]="compareName"
+                    id="name"
+                    formControlName="name">
+              <mat-option [value]="name" *ngFor="let name of languageNames">
+                {{name.name}}
+              </mat-option>
+            </mat-select>
+
+            <mat-hint align="end">Introduce el nombre del idioma</mat-hint>
+            <mat-error *ngIf="rForm.controls['name'].errors">{{getErrorMessageName()}}</mat-error>
+          </mat-form-field>
+        </div>
+
+        <!--
+        <div>
+          <mat-form-field appearance="standard">
+            <mat-label>Fecha de obtención del título</mat-label>
+            <input matInput type="text"
+                   placeholder="Fecha del título"
+                   id="date"
+                   required
+                   formControlName="date"
+                   class="form-control"
+                   [ngClass]="{
+                              'is-invalid': submitted && rForm.controls['date'].errors
+                          }">
+            <mat-hint align="end">Introduce una fecha correcta</mat-hint>
+            <mat-error *ngIf="rForm.controls['date'].errors">{{getErrorMessageDate()}}</mat-error>
+          </mat-form-field>
+        </div>
+        -->
+        <div>
+          <mat-form-field>
+            <mat-label>Fecha de obtención del título</mat-label>
+            <input matInput
+                   placeholder="Fecha del título"
+                   id="date"
+                   required
+                   formControlName="date"
+                   class="form-control"
+                   [ngClass]="{
+                              'is-invalid': submitted && rForm.controls['date'].errors
+                          }"
+                   [matDatepicker]="picker">
+            <mat-hint align="end">Introduce una fecha válida</mat-hint>
+            <mat-error *ngIf="rForm.controls['date'].errors">{{getErrorMessageDate()}}</mat-error>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+
+
+        <mat-card-actions fxLayout="row" fxLayoutAlign="space-between">
+          <button mat-raised-button color="primary" type="submit" [disabled]="rForm.invalid">
+            <i class="material-icons">archive</i>Guardar</button>
+        </mat-card-actions>
+      </form>
+    </div>
+  </mat-card>
+</div>
+

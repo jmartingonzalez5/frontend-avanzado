@@ -1,12 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { SigninService } from './signin.service';
-import { ProfileService } from 'src/app/shared/services/profile.service';
-import {Store} from '@ngrx/store';
-import {IAppState} from '../../shared/store/state/app.state';
-import {GetMockUser, GetUsers, Login} from '../../shared/store/actions/auth.actions';
-
+import { FormGroup, Validators, FormControl } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { AppStore } from 'src/app/shared/states/store.interface';
+import * as AuthActions from 'src/app/shared/states/auth/actions/auth.actions';
 
 @Component({
   selector: 'app-signin',
@@ -17,30 +13,27 @@ export class SigninComponent implements OnInit {
   loginForm: FormGroup;
   submitted = false;
   errorLogin = false;
-
-  constructor(
-    private signinService: SigninService,
-    private profileService: ProfileService,
-    private formBuilder: FormBuilder,
-    private router: Router,
-    private _store: Store<IAppState>
-  ) {}
+  constructor(private store$: Store<AppStore>) {}
 
   ngOnInit() {
-    this.loginForm = this.formBuilder.group({
-      email: ['', [Validators.email, Validators.required]],
-      password: ['', Validators.required]
+    this.loginForm = new FormGroup({
+      email: new FormControl('', [Validators.email, Validators.required]),
+      password: new FormControl('', Validators.required),
+      rememberMe: new FormControl(false),
     });
-
-    // Inicializar la lista de usuarios:
-      this._store.dispatch(new GetUsers());
   }
 
   onSubmit() {
-      this.submitted = true;
-
-      // this.store.dispatch(new GetMockUser());
-      this._store.dispatch(new Login({ email: this.loginForm.controls['email'].value, password: this.loginForm.controls['password'].value}));
-
+    this.submitted = true;
+    this.store$.dispatch(new AuthActions.Identification({...this.loginForm.value}));
   }
+
+  getErrorMessagePassword(){
+      return this.loginForm.controls['password'].hasError('required') ? 'Debes introducir un valor' : '';
+  }
+  getErrorMessageEmail() {
+        return this.loginForm.controls['email'].hasError('required') ? 'Debes introducir un valor' :
+            this.loginForm.controls['email'].hasError('email') ? 'Email con formato inválido' :
+                '';
+    }
 }

@@ -1,49 +1,60 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { User } from 'src/app/shared/models/user.model';
-import {select, Store} from '@ngrx/store';
-import {selectUserProfile} from '../../../shared/store/selectors/userProfile.selector';
-import {IAppState} from '../../../shared/store/state/app.state';
-import {SaveProfile} from '../../../shared/store/actions/userProfile.actions';
+import {AppSettings} from '../../../shared/app.settings';
+
 
 @Component({
   selector: 'app-profile-student',
   templateUrl: './profile-student.component.html',
   styleUrls: ['./profile-student.component.scss']
 })
-
 export class ProfileStudentComponent {
-    userProfile$ = this._store.pipe(select(selectUserProfile));
-    userProfile: User;
-
-  user: User;
-  constructor(private _store: Store<IAppState>) {
-      this.userProfile$.subscribe(userProfile => this.userProfile = userProfile);
-  }
+  @Input() user: User;
+  // tslint:disable-next-line: no-output-on-prefix
+  @Output() onDeleteStudy: EventEmitter<User> = new EventEmitter();
+  // tslint:disable-next-line: no-output-on-prefix
+  @Output() onDeleteLanguage: EventEmitter<User> = new EventEmitter();
 
 
+  displayedColumnsTableIdiomas: string[] = ['Nivel', 'Idioma', 'Fecha', 'Acciones'];
+  displayedColumnsTableFormacionAcademica: string[] = ['Tipo', 'Nivel', 'Título', 'Centro', 'Fecha', 'Certificado', 'Bilingüe', 'Dual', 'Acciones'];
+
+  constructor() {}
 
   deleteStudy(studyID: number) {
-      const studies = this.userProfile.studies;
-      const index = studies.findIndex(study => study.uid === studyID);
-      if (index === -1) {
-          alert('Error: Study not found');
-          return;
-      }
-      studies.splice(index, 1);
 
-      this._store.dispatch(new SaveProfile(this.userProfile));
+    const studies = [...this.user.studies];
+    const index = studies.findIndex(study => study.uid === studyID);
+    if (index === -1) {
+      alert('Error: Study not found');
+      return;
+    }
+    studies.splice(index, 1);
+    const user = {
+      ...this.user,
+      studies
+    };
+    this.onDeleteStudy.emit(user);
   }
 
-
   deleteLanguage(languageID: any) {
-    const languages = this.userProfile.languages;
+    const languages = [...this.user.languages];
     const index = languages.findIndex(language => language.uid === languageID);
     if (index === -1) {
       alert('Error: Language not found');
       return;
     }
     languages.splice(index, 1);
-
-      this._store.dispatch(new SaveProfile(this.userProfile));
+    const user = {
+      ...this.user,
+      languages
+    };
+    this.onDeleteLanguage.emit(user);
   }
+
+    convertDate(inputFormat) {
+        return AppSettings.convertDate(inputFormat);
+    }
+
+
 }

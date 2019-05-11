@@ -2,7 +2,7 @@ export interface Language {
   uid: number;
   level: LanguageLevel;
   name: LanguageName;
-  date: string;
+  date: Date;
 }
 export interface LanguageName {
   uid: number;

@@ -7,7 +7,7 @@ export interface Offer {
   job: JobOffer;
   province: Province;
   municipe: Municipe;
-  date: string;
+  date: Date;
   category: Category;
   title: TitleStudy[];
 }

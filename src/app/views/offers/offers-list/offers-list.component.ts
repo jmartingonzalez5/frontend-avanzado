@@ -1,60 +1,56 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  OnChanges,
+  SimpleChanges
+} from '@angular/core';
+import { OffersService } from 'src/app/shared/services/offers.service';
 import { Offer } from 'src/app/shared/models/offer.model';
-
-import {select, Store} from '@ngrx/store';
-import {IAppState} from '../../../shared/store/state/app.state';
-import {selectUserProfile} from '../../../shared/store/selectors/userProfile.selector';
-import {User} from '../../../shared/models/user.model';
-
-import {selectJobOffersList} from '../../../shared/store/selectors/jobOffers.selector';
+import { ProfileService } from 'src/app/shared/services/profile.service';
+import { User } from 'src/app/shared/models/user.model';
+import {AppSettings} from '../../../shared/app.settings';
 
 @Component({
   selector: 'app-offers-list',
   templateUrl: './offers-list.component.html'
 })
-export class OffersListComponent implements OnInit {
+export class OffersListComponent implements OnChanges {
+  @Input() user: User;
+  @Input() offers: Offer[];
+  offersStudy: Offer[] = [];
+  offersOther: Offer[] = [];
 
-    userProfile$ = this._store.pipe(select(selectUserProfile));
-    userProfile: User;
+  displayedColumnsTableTitulacion: string[] = ['Puesto', 'Empresa', 'Familia', 'Fecha', 'Provincia', 'Municipio', 'Inscrito', 'Acciones'];
+  displayedColumnsTableOtrasOfertas: string[] = ['Puesto', 'Empresa', 'Familia', 'Fecha', 'Provincia', 'Municipio'];
 
-    jobOffers$ = this._store.pipe(select(selectJobOffersList));
-    jobOffers: Offer[];
+  constructor() {}
 
-
-    offersStudy: Offer[] = [];
-    offersOther: Offer[] = [];
-
-
-  constructor(private _store: Store<IAppState>) {
-
-        this.userProfile$.subscribe(userProfile => this.userProfile = userProfile);
-        this.jobOffers$.subscribe(jobOffers => this.jobOffers = jobOffers);
-
-        this.selectOffers();
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.user && changes.offers) {
+      this.selectOffers();
+    }
   }
-
-
 
   private selectOffers() {
-      const studiesOfUser = this.userProfile.studies;
-      const offersOfUser = this.userProfile.offers;
-
-      this.offersStudy = this.jobOffers
-          .filter(offer =>
-              studiesOfUser.some(study => study.uid === offer.category.uid)
-          )
-          .map(offer => {
-              const offerUser = !!offersOfUser.find(
-                  _offerUser => _offerUser.id === offer.id
-              );
-              return { ...offer, subscribe: offerUser };
-          });
-
-
-      this.offersOther = this.jobOffers.filter(offer =>
-          studiesOfUser.every(study => study.uid !== offer.category.uid)
-      );
+    const studiesOfUser = this.user.studies;
+    const offersOfUser = this.user.offers;
+    this.offersStudy = this.offers
+      .filter(offer =>
+        studiesOfUser.some(study => study.uid === offer.category.uid)
+      )
+      .map(offer => {
+        const offerUser = !!offersOfUser.find(
+          _offerUser => _offerUser.id === offer.id
+        );
+        return { ...offer, subscribe: offerUser };
+      });
+    this.offersOther = this.offers.filter(offer =>
+      studiesOfUser.every(study => study.uid !== offer.category.uid)
+    );
   }
 
-  ngOnInit() {}
+    convertDate(inputFormat) {
+        return AppSettings.convertDate(inputFormat);
+    }
 }

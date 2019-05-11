@@ -1,72 +1,101 @@
-import { Component, Output, EventEmitter, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  Output,
+  EventEmitter,
+  Input,
+  OnInit,
+  SimpleChanges,
+  OnChanges
+} from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import {
   VocationalStudy,
   Institution,
   Category,
   TitleStudy,
-  Grade
+  Grade,
+  CollegeStudy
 } from 'src/app/shared/models/study.model';
-
+import { MockData } from 'src/app/shared/mock-data';
 import { dateValidator } from 'src/app/shared/directives/date-validator.directive';
-import {select, Store} from '@ngrx/store';
-import {IAppState} from '../../../../../shared/store/state/app.state';
-
-import {selectVocationalGradeList} from '../../../../../shared/store/selectors/general/vocationalGrade.selector';
-import {selectVocationalCategoryList} from '../../../../../shared/store/selectors/general/vocationalCategory.selector';
-import {selectVocationalTitlesList} from '../../../../../shared/store/selectors/general/vocationalTitle.selector';
-import {selectVocationalInstitutionList} from '../../../../../shared/store/selectors/general/vocationalInstitution.selector';
-
 
 @Component({
   selector: 'app-vocational-form',
   templateUrl: './vocational-form.component.html'
 })
-export class VocationalFormComponent implements OnInit {
+export class VocationalFormComponent implements OnInit, OnChanges {
   @Output() onSave: EventEmitter<VocationalStudy> = new EventEmitter();
   @Input() study: VocationalStudy = {} as VocationalStudy;
-
-
+  public institutions: Institution[];
+  public categories: Category[];
+  public titles: TitleStudy[];
+  public grades: Grade[];
   public rForm: FormGroup;
 
-    institutions$  = this._store.pipe(select(selectVocationalInstitutionList));
-    categories$  = this._store.pipe(select(selectVocationalCategoryList));
-    titles$  = this._store.pipe(select(selectVocationalTitlesList));
-    grades$  = this._store.pipe(select(selectVocationalGradeList));
-
-
-  constructor(private _store: Store<IAppState>) {}
-
+  constructor() {}
   ngOnInit() {
-
-    this.loadFormInstance();
+    this.loadSelectProperties();
   }
 
-
-  public loadFormInstance(): void {
-      this.rForm = new FormGroup({
-        institution: new FormControl(this.study.institution, [
-          Validators.required
-        ]),
-        category: new FormControl(this.study.category, [Validators.required]),
-        grade: new FormControl(this.study.grade, [Validators.required]),
-        title: new FormControl(this.study.title, [Validators.required]),
-        date: new FormControl(this.study.date, [
-          Validators.required,
-          dateValidator()
-        ]),
-        dual: new FormControl(this.study.dual, []),
-        bilingue: new FormControl(this.study.bilingue, [])
-      });
+  ngOnChanges(changes: SimpleChanges) {
+    let study = {} as VocationalStudy;
+    if (this.hasChangeStudy(changes.study)) {
+      study = changes.study.currentValue;
+    }
+    this.loadFormInstance(study);
+  }
+  private hasChangeStudy(study) {
+    return study && study.currentValue;
   }
 
-  public submit() {
-      this.onSave.emit({ ...this.study, ...this.rForm.value });
+  public loadSelectProperties(): void {
+    this.institutions = MockData.VOCATIONAL_INSTITUTION;
+    this.categories = MockData.VOCATIONAL_CATEGORY;
+    this.titles = MockData.VOCATIONAL_TITLE;
+    this.grades = MockData.VOCATIONAL_GRADES;
+  }
+
+  public loadFormInstance(study: VocationalStudy): void {
+    this.rForm = new FormGroup({
+      institution: new FormControl(study.institution, [Validators.required]),
+      category: new FormControl(study.category, [Validators.required]),
+      grade: new FormControl(study.grade, [Validators.required]),
+      title: new FormControl(study.title, [Validators.required]),
+      date: new FormControl(study.date, [Validators.required, dateValidator()]),
+      dual: new FormControl(study.dual, []),
+      bilingue: new FormControl(study.bilingue, [])
+    });
+  }
+
+    getErrorMessageInstitution() {
+        return this.rForm.controls['institution'].hasError('required') ? 'Debes introducir un Centro Educativo' : '';
+    }
+
+    getErrorMessageCategory() {
+        return this.rForm.controls['category'].hasError('required') ? 'Debes introducir la Familia Profesional' : '';
+    }
+
+    getErrorMessageGrade() {
+        return this.rForm.controls['grade'].hasError('required') ? 'Debes introducir el Nivel' : '';
+    }
+
+    getErrorMessageTitle() {
+        return this.rForm.controls['title'].hasError('required') ? 'Debes introducir el Título' : '';
+    }
+
+    getErrorMessageDate() {
+        return this.rForm.controls['date'].hasError('required') ? 'Debes introducir una Fecha' :
+            this.rForm.controls['date'].hasError('dateValidator') ? 'Formato fecha errónea' :
+                '';
+    }
+
+    public submit() {
+    this.onSave.emit({ ...this.study, ...this.rForm.value });
   }
 
   public compareInstitution(
-      institution1: Institution,
-      institution2?: Institution
+    institution1: Institution,
+    institution2?: Institution
   ) {
     return institution1.uid === (institution2 && institution2.uid);
   }

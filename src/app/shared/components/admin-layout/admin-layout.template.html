@@ -6,12 +6,46 @@
     [notificPanel]="notificationPanel"
   >
   </app-header-top> -->
-<div class="row">
-  <div class="col-3">
+
+
+
+<div fxLayout="row" fxLayoutAlign="flex-start"  gdColumns="20% 80%">
+
+  <mat-toolbar color="primary">
+          <mat-toolbar-row>
+              <mat-icon aria-hidden="false" aria-label="Logout">exit_to_app</mat-icon>
+              <span routerLink="/">Logout</span>
+          </mat-toolbar-row>
+
+          <mat-toolbar-row>
+              <mat-icon  aria-hidden="false" aria-label="Dashboard">dashboard</mat-icon>
+            <span routerLink="/admin/">Dashboard</span>
+          </mat-toolbar-row>
+
+          <mat-toolbar-row>
+              <mat-icon aria-hidden="false" aria-label="Perfil">account_box</mat-icon>
+            <span routerLink="/admin/profile">Profile</span>
+          </mat-toolbar-row>
+
+          <mat-toolbar-row>
+              <mat-icon aria-hidden="false" aria-label="Ofertas">business_center</mat-icon>
+            <span routerLink="/admin/offers">Offers</span>
+          </mat-toolbar-row>
+
+          <mat-toolbar-row>
+              <mat-icon aria-hidden="false" aria-label="Configuracion">settings</mat-icon>
+            <span routerLink="/admin/config">Configuración</span>
+          </mat-toolbar-row>
+
+          <mat-toolbar-row>
+              <mat-icon aria-hidden="false" aria-label="Mis ofertas (mi carpeta)">folder_shared</mat-icon>
+            <span routerLink="/admin/offers/my-offers">Mis Ofertas</span>
+          </mat-toolbar-row>
+  </mat-toolbar>
+  <!--
+  <div>
     <ul>
-      <li>
-        <button (click)="buttonLogout()">Logout</button>
-      </li>
+      <li><a routerLink="/">Logout</a></li>
       <li><a routerLink="/admin/">Dashboard</a></li>
 
       <li><a routerLink="/admin/profile">Profile</a></li>
@@ -24,7 +58,8 @@
       </li>
     </ul>
   </div>
-  <div class="col-9">
+-->
+  <div>
     <router-outlet></router-outlet>
   </div>
 </div>
