@@ -59,6 +59,32 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "src/ngsw-config.json"
+            },
+            "QA": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.qa.ts"
+                }
+              ],
+              "optimization": false,  // CAMBIADO a false
+              "outputHashing": "all",
+              "sourceMap": true,     // CAMBIADO a true
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": false,  // CAMBIADO a false
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "src/ngsw-config.json"
             }
           }
         },
@@ -68,9 +94,17 @@
             "browserTarget": "UOCJob:build"
           },
           "configurations": {
-            "production": {
-              "browserTarget": "UOCJob:build:production"
-            }
+              "production": {
+                "browserTarget": "UOCJob:build:production"
+              },
+              "QA": {
+                "fileReplacements": [
+                  {
+                    "replace": "src/environments/environment.ts",
+                    "with": "src/environments/environment.qa.ts"
+                  }
+                ]
+              }
           }
         },
         "extract-i18n": {
