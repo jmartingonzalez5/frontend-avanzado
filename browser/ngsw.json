@@ -1,0 +1,94 @@
+{
+  "configVersion": 1,
+  "timestamp": 1560653439970,
+  "index": "https://jmartingonzalez5.github.io/frontend-avanzado/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "urls": [
+        "https://jmartingonzalez5.github.io/frontend-avanzado/10.1ead011a39d0b02a0448.js",
+        "https://jmartingonzalez5.github.io/frontend-avanzado/11.2ed50a66fda9a7f4c7b4.js",
+        "https://jmartingonzalez5.github.io/frontend-avanzado/12.488911c8386753381878.js",
+        "https://jmartingonzalez5.github.io/frontend-avanzado/2.b75e12e51687ea6001d8.js",
+        "https://jmartingonzalez5.github.io/frontend-avanzado/6.3aa63dd6b9450d3a611a.js",
+        "https://jmartingonzalez5.github.io/frontend-avanzado/7.70ba812455872e09bdcb.js",
+        "https://jmartingonzalez5.github.io/frontend-avanzado/8.47d1f203af6a95b19538.js",
+        "https://jmartingonzalez5.github.io/frontend-avanzado/9.68cd0e1b39e14d137dfe.js",
+        "https://jmartingonzalez5.github.io/frontend-avanzado/common.36ba9170a3c728674887.js",
+        "https://jmartingonzalez5.github.io/frontend-avanzado/favicon.ico",
+        "https://jmartingonzalez5.github.io/frontend-avanzado/index.html",
+        "https://jmartingonzalez5.github.io/frontend-avanzado/main.13e861f96e04f5547f06.js",
+        "https://jmartingonzalez5.github.io/frontend-avanzado/polyfills.336c178dd6f511ab9d27.js",
+        "https://jmartingonzalez5.github.io/frontend-avanzado/runtime.f8ce93ff93fa16c7b705.js",
+        "https://jmartingonzalez5.github.io/frontend-avanzado/styles.bd10042705057d46633a.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "urls": [
+        "https://jmartingonzalez5.github.io/frontend-avanzado/assets/icons/icon-128x128.png",
+        "https://jmartingonzalez5.github.io/frontend-avanzado/assets/icons/icon-144x144.png",
+        "https://jmartingonzalez5.github.io/frontend-avanzado/assets/icons/icon-152x152.png",
+        "https://jmartingonzalez5.github.io/frontend-avanzado/assets/icons/icon-192x192.png",
+        "https://jmartingonzalez5.github.io/frontend-avanzado/assets/icons/icon-384x384.png",
+        "https://jmartingonzalez5.github.io/frontend-avanzado/assets/icons/icon-512x512.png",
+        "https://jmartingonzalez5.github.io/frontend-avanzado/assets/icons/icon-72x72.png",
+        "https://jmartingonzalez5.github.io/frontend-avanzado/assets/icons/icon-96x96.png",
+        "https://jmartingonzalez5.github.io/frontend-avanzado/assets/img/perfil.png",
+        "https://jmartingonzalez5.github.io/frontend-avanzado/assets/img/uoc_logo.png"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "https://jmartingonzalez5.github.io/frontend-avanzado/10.1ead011a39d0b02a0448.js": "ded854ef56af75ce0eaa902ab93c189593fa0c1d",
+    "https://jmartingonzalez5.github.io/frontend-avanzado/11.2ed50a66fda9a7f4c7b4.js": "fdfa8716f8afd2929ef68e178cb78b7ed896d0b1",
+    "https://jmartingonzalez5.github.io/frontend-avanzado/12.488911c8386753381878.js": "0918ce046930b02ce639f13c26ed4a1f393fb78f",
+    "https://jmartingonzalez5.github.io/frontend-avanzado/2.b75e12e51687ea6001d8.js": "4c9ebabb24d937f83bf04c0505630dd46bc50eaa",
+    "https://jmartingonzalez5.github.io/frontend-avanzado/6.3aa63dd6b9450d3a611a.js": "d74cbb18c81d4f8166358ec10c0da0891bc3ba13",
+    "https://jmartingonzalez5.github.io/frontend-avanzado/7.70ba812455872e09bdcb.js": "72e86a1135d38cae441dbbe4068fd0c03b6b7f75",
+    "https://jmartingonzalez5.github.io/frontend-avanzado/8.47d1f203af6a95b19538.js": "156fcd9c1f54bd902787a675c89216954e7f0b1d",
+    "https://jmartingonzalez5.github.io/frontend-avanzado/9.68cd0e1b39e14d137dfe.js": "981f293fb2b300488fbe038078c14aae8fc1547d",
+    "https://jmartingonzalez5.github.io/frontend-avanzado/assets/icons/icon-128x128.png": "dae3b6ed49bdaf4327b92531d4b5b4a5d30c7532",
+    "https://jmartingonzalez5.github.io/frontend-avanzado/assets/icons/icon-144x144.png": "b0bd89982e08f9bd2b642928f5391915b74799a7",
+    "https://jmartingonzalez5.github.io/frontend-avanzado/assets/icons/icon-152x152.png": "7479a9477815dfd9668d60f8b3b2fba709b91310",
+    "https://jmartingonzalez5.github.io/frontend-avanzado/assets/icons/icon-192x192.png": "1abd80d431a237a853ce38147d8c63752f10933b",
+    "https://jmartingonzalez5.github.io/frontend-avanzado/assets/icons/icon-384x384.png": "329749cd6393768d3131ed6304c136b1ca05f2fd",
+    "https://jmartingonzalez5.github.io/frontend-avanzado/assets/icons/icon-512x512.png": "559d9c4318b45a1f2b10596bbb4c960fe521dbcc",
+    "https://jmartingonzalez5.github.io/frontend-avanzado/assets/icons/icon-72x72.png": "c457e56089a36952cd67156f9996bc4ce54a5ed9",
+    "https://jmartingonzalez5.github.io/frontend-avanzado/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
+    "https://jmartingonzalez5.github.io/frontend-avanzado/assets/img/perfil.png": "c34d68aa614df190342bf4ccfb05fabce3561034",
+    "https://jmartingonzalez5.github.io/frontend-avanzado/assets/img/uoc_logo.png": "a8268228316a687fc11a0ecbedb2507aedcccf39",
+    "https://jmartingonzalez5.github.io/frontend-avanzado/common.36ba9170a3c728674887.js": "1205b682071dbf6a99ecbbd19b0cacc038639d87",
+    "https://jmartingonzalez5.github.io/frontend-avanzado/favicon.ico": "84161b857f5c547e3699ddfbffc6d8d737542e01",
+    "https://jmartingonzalez5.github.io/frontend-avanzado/index.html": "06a63cce7969c9e214980e5fb742039520e048dd",
+    "https://jmartingonzalez5.github.io/frontend-avanzado/main.13e861f96e04f5547f06.js": "00a68a317ba592fc78614c57ce082cdff44645d9",
+    "https://jmartingonzalez5.github.io/frontend-avanzado/polyfills.336c178dd6f511ab9d27.js": "ad694bde90ef6fbc8e2ff50af075839e8ced058a",
+    "https://jmartingonzalez5.github.io/frontend-avanzado/runtime.f8ce93ff93fa16c7b705.js": "5c572e2115df6a68caf6c066774ee5f845d9b764",
+    "https://jmartingonzalez5.github.io/frontend-avanzado/styles.bd10042705057d46633a.css": "fd158364b7c30c6c8759cf72135c2441c99ea45c"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ]
+}
