@@ -1,0 +1,138 @@
+<form name="myForm" [formGroup]="rForm" (submit)="submit()">
+
+  <div>
+    <mat-form-field appearance="standard">
+      <mat-label>Centro Educativo</mat-label>
+
+      <mat-select
+              [compareWith]="compareInstitution"
+              required
+              id="institution"
+              formControlName="institution">
+        <mat-option [value]="institution" *ngFor="let institution of institutions">
+          {{institution.name}}
+        </mat-option>
+      </mat-select>
+
+      <mat-hint align="end">Introduce el Centro Educativo</mat-hint>
+      <mat-error *ngIf="rForm.controls['institution'].errors">{{getErrorMessageInstitution()}}</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field appearance="standard">
+      <mat-label>Familia Profesional</mat-label>
+
+      <mat-select
+              [compareWith]="compareCategory"
+              required
+              id="category"
+              formControlName="category">
+        <mat-option [value]="category" *ngFor="let category of categories">
+          {{category.name}}
+        </mat-option>
+      </mat-select>
+
+      <mat-hint align="end">Introduce la Familia Profesional</mat-hint>
+      <mat-error *ngIf="rForm.controls['category'].errors">{{getErrorMessageCategory()}}</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field appearance="standard">
+      <mat-label>Nivel</mat-label>
+
+      <mat-select
+              [compareWith]="compareGrade"
+              required
+              id="grade"
+              formControlName="grade">
+        <mat-option [value]="grade" *ngFor="let grade of grades">
+          {{grade.name}}
+        </mat-option>
+      </mat-select>
+
+      <mat-hint align="end">Introduce el Nivel</mat-hint>
+      <mat-error *ngIf="rForm.controls['grade'].errors">{{getErrorMessageGrade()}}</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field appearance="standard">
+      <mat-label>Título</mat-label>
+
+      <mat-select
+              [compareWith]="compareTitle"
+              required
+              id="title"
+              formControlName="title">
+        <mat-option [value]="title" *ngFor="let title of titles">
+          {{title.name}}
+        </mat-option>
+      </mat-select>
+
+      <mat-hint align="end">Introduce el Título</mat-hint>
+      <mat-error *ngIf="rForm.controls['title'].errors">{{getErrorMessageTitle()}}</mat-error>
+    </mat-form-field>
+  </div>
+
+  <!--
+  <div>
+    <mat-form-field appearance="standard">
+      <mat-label>Fecha de obtención del título</mat-label>
+      <input matInput type="text"
+             placeholder="Fecha del título"
+             id="date"
+             required
+             formControlName="date"
+             class="form-control"
+             [ngClass]="{
+                              'is-invalid': submitted && rForm.controls['date'].errors
+                          }">
+      <mat-hint align="end">Introduce la fecha de obtención del título</mat-hint>
+      <mat-error *ngIf="rForm.controls['date'].errors">{{getErrorMessageDate()}}</mat-error>
+    </mat-form-field>
+  </div>
+  -->
+  <div>
+    <mat-form-field>
+      <mat-label>Fecha de obtención del título</mat-label>
+      <input matInput
+             placeholder="Fecha del título"
+             id="date"
+             required
+             formControlName="date"
+             class="form-control"
+             [ngClass]="{
+                              'is-invalid': submitted && rForm.controls['date'].errors
+                          }"
+             [matDatepicker]="picker">
+      <mat-hint align="end">Introduce una fecha válida</mat-hint>
+      <mat-error *ngIf="rForm.controls['date'].errors">{{getErrorMessageDate()}}</mat-error>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </div>
+
+
+  <div>
+    <mat-checkbox id="bilingue"
+                  formControlName="bilingue"
+                  class="form-control">
+      Bilingue
+    </mat-checkbox>
+  </div>
+
+  <div>
+    <mat-checkbox id="dual"
+                  formControlName="dual"
+                  class="form-control">
+      Dual
+    </mat-checkbox>
+  </div>
+
+  <mat-card-actions fxLayout="row" fxLayoutAlign="space-between">
+    <button mat-raised-button color="primary" type="submit" [disabled]="rForm.invalid">
+      <i class="material-icons">archive</i>Guardar</button>
+  </mat-card-actions>
+</form>

@@ -1,0 +1,256 @@
+<div class="container">
+
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Modificar datos personales</mat-card-title>
+    </mat-card-header>
+
+    <form [formGroup]="rForm" (submit)="save()">
+      <div class="contentCard">
+
+          <div>
+            <mat-form-field appearance="standard">
+              <mat-label>Nombre</mat-label>
+              <input matInput type="text"
+                     placeholder="Nombre"
+                     id="name"
+                     required
+                     formControlName="name"
+                     class="form-control"
+                     [ngClass]="{
+                              'is-invalid': submitted && rForm.controls['name'].errors
+                          }">
+              <mat-hint align="end">Introduce un nombre válido</mat-hint>
+              <mat-error *ngIf="rForm.controls['name'].errors">{{getErrorMessageName()}}</mat-error>
+            </mat-form-field>
+          </div>
+
+          <div>
+            <mat-form-field appearance="standard">
+              <mat-label>Apellidos</mat-label>
+              <input matInput type="text"
+                     placeholder="Apellidos"
+                     id="surname"
+                     required
+                     formControlName="surname"
+                     class="form-control"
+                     [ngClass]="{
+                              'is-invalid': submitted && rForm.controls['surname'].errors
+                          }">
+              <mat-hint align="end">Introduce un apellido válido</mat-hint>
+              <mat-error *ngIf="rForm.controls['surname'].errors">{{getErrorMessageSurname()}}</mat-error>
+            </mat-form-field>
+          </div>
+
+
+          <div>
+              <mat-form-field>
+                  <mat-label>Fecha de Nacimiento</mat-label>
+                  <input matInput
+                         placeholder="Fecha de nacimiento"
+                        id="birthdate"
+                        required
+                        formControlName="birthdate"
+                         class="form-control"
+                         [ngClass]="{
+                              'is-invalid': submitted && rForm.controls['birthdate'].errors
+                          }"
+                         [matDatepicker]="picker">
+                  <mat-hint align="end">Introduce una fecha válida</mat-hint>
+                  <mat-error *ngIf="rForm.controls['birthdate'].errors">{{getErrorMessageBirthdate()}}</mat-error>
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+          </div>
+
+          <div>
+            <mat-form-field appearance="standard">
+              <mat-label>Teléfono</mat-label>
+              <input matInput type="text"
+                     placeholder="Teléfono"
+                     id="phone"
+                     required
+                     formControlName="phone"
+                     class="form-control"
+                     [ngClass]="{
+                              'is-invalid': submitted && rForm.controls['phone'].errors
+                          }">
+              <mat-hint align="end">Introduce un teléfono válido</mat-hint>
+              <mat-error *ngIf="rForm.controls['phone'].errors">{{getErrorMessagePhone()}}</mat-error>
+            </mat-form-field>
+          </div>
+
+          <div>
+            <mat-form-field appearance="standard">
+              <mat-label>Teléfono 2</mat-label>
+              <input matInput type="text"
+                     placeholder="Teléfono 2"
+                     id="phone2"
+                     required
+                     formControlName="phone2"
+                     class="form-control"
+                     [ngClass]="{
+                              'is-invalid': submitted && rForm.controls['phone2'].errors
+                          }">
+              <mat-hint align="end">Introduce un teléfono válido</mat-hint>
+              <mat-error *ngIf="rForm.controls['phone2'].errors">{{getErrorMessagePhone2()}}</mat-error>
+            </mat-form-field>
+          </div>
+
+        <!-- TIPO DE DOCUMENTO -->
+          <div>
+            <mat-form-field appearance="standard">
+              <mat-label>Tipo de Documento</mat-label>
+
+              <mat-select
+                           [compareWith]="compareByUID"
+                           required
+                           id="documentType"
+                           formControlName="documentType">
+                <mat-option [value]="documentType" *ngFor="let documentType of documentsType">
+                  {{documentType.name}}
+                </mat-option>
+              </mat-select>
+
+              <mat-hint align="end">Introduce un tipo de documento</mat-hint>
+              <mat-error *ngIf="rForm.controls['documentType'].errors">{{getErrorMessageDocumentType()}}</mat-error>
+            </mat-form-field>
+          </div>
+
+
+          <div>
+            <mat-form-field appearance="standard">
+              <mat-label>Número de documento</mat-label>
+              <input matInput type="text"
+                     placeholder="Número de documento"
+                     id="documentNumber"
+                     required
+                     formControlName="documentNumber"
+                     class="form-control"
+                     [ngClass]="{
+                              'is-invalid': submitted && rForm.controls['documentNumber'].errors
+                          }">
+              <mat-hint align="end">Introduce un número de documento válido</mat-hint>
+              <mat-error *ngIf="rForm.controls['documentNumber'].errors">{{getErrorMessageDocumentNumber()}}</mat-error>
+            </mat-form-field>
+          </div>
+
+          <div>
+            <mat-form-field appearance="standard">
+              <mat-label>Calle</mat-label>
+              <input matInput type="text"
+                     placeholder="Calle"
+                     id="street"
+                     required
+                     formControlName="street"
+                     class="form-control"
+                     [ngClass]="{
+                              'is-invalid': submitted && rForm.controls['street'].errors
+                          }">
+              <mat-hint align="end">Introduce una calle válida</mat-hint>
+              <mat-error *ngIf="rForm.controls['street'].errors">{{getErrorMessageStreet()}}</mat-error>
+            </mat-form-field>
+          </div>
+
+
+          <!-- PROVINCE: LISTA  -->
+          <div>
+            <mat-form-field appearance="standard">
+              <mat-label>Provincia</mat-label>
+
+              <mat-select
+                      [compareWith]="compareByUID"
+                      required
+                      name="province"
+                      id="province"
+                      formControlName="province">
+                <mat-option [value]="province" *ngFor="let province of provinces">
+                  {{province.name}}
+                </mat-option>
+              </mat-select>
+
+              <mat-hint align="end">Introduce una provincia</mat-hint>
+              <mat-error *ngIf="rForm.controls['province'].errors">{{getErrorMessageProvince()}}</mat-error>
+            </mat-form-field>
+          </div>
+
+
+            <!-- MUNICIPE: LISTA  -->
+          <div>
+            <mat-form-field appearance="standard">
+              <mat-label>Municipio</mat-label>
+
+              <mat-select
+                      [compareWith]="compareByUID"
+                      required
+                      name="municipe"
+                      formControlName="municipe">
+                <mat-option [value]="municipe" *ngFor="let municipe of municipes">
+                  {{municipe.name}}
+                </mat-option>
+              </mat-select>
+
+              <mat-hint align="end">Introduce una provincia</mat-hint>
+              <mat-error *ngIf="rForm.controls['province'].errors">{{getErrorMessageMunicipe()}}</mat-error>
+            </mat-form-field>
+          </div>
+
+
+          <div>
+            <mat-form-field appearance="standard">
+              <mat-label>Acerca de mi</mat-label>
+
+              <textarea matInput
+                        placeholder="Acerca de mi"
+                        id="aboutMe"
+                        formControlName="aboutMe"
+                        class="form-control"
+                        cdkTextareaAutosize
+                        cdkAutosizeMinRows="4"
+                        cdkAutosizeMaxRows="14"></textarea>
+              <mat-hint align="end">Introduce información acerca de ti</mat-hint>
+            </mat-form-field>
+          </div>
+
+          <div>
+            <mat-form-field appearance="standard">
+              <mat-label>Otras Competencias</mat-label>
+              <textarea matInput
+                        placeholder="Otras competencias"
+                        id="otherCompetences"
+                        formControlName="otherCompetences"
+                        class="form-control"
+                        cdkTextareaAutosize
+                        cdkAutosizeMinRows="4"
+                        cdkAutosizeMaxRows="14"></textarea>
+              <mat-hint align="end">Introduce otras competencias</mat-hint>
+            </mat-form-field>
+          </div>
+
+
+          <div>
+            <mat-form-field appearance="standard">
+              <mat-label>Licencias</mat-label>
+              <textarea matInput
+                        placeholder="Licencias"
+                        id="license"
+                        formControlName="license"
+                        class="form-control"
+                        cdkTextareaAutosize
+                        cdkAutosizeMinRows="4"
+                        cdkAutosizeMaxRows="14"></textarea>
+              <mat-hint align="end">Introduce licencias</mat-hint>
+            </mat-form-field>
+          </div>
+
+          <div>
+              <mat-card-actions fxLayout="row" fxLayoutAlign="space-between">
+                <button mat-raised-button color="primary" type="submit" [disabled]="rForm.invalid">
+                    <i class="material-icons">archive</i>Guardar</button>
+              </mat-card-actions>
+          </div>
+      </div>
+    </form>
+  </mat-card>
+</div>
+
