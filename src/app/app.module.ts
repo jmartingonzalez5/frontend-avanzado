@@ -10,7 +10,6 @@ import { FakeBackendService } from './shared/inmemory-db/fake-backend.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //import { HeaderComponent } from './shared/header/header.component';
 
-import { MaterialModuleModule } from './shared/material-module/material-module.module';
 //import { HeaderComponent } from 'src/app/shared/header/header.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -31,7 +30,6 @@ export const NGRX_STATE = makeStateKey('NGRX_STATE');
       dataEncapsulation: false
     }),
     BrowserAnimationsModule,
-    MaterialModuleModule,
     FlexLayoutModule,
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     BrowserTransferStateModule,
