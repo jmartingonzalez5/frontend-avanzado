@@ -21,6 +21,8 @@ export class ProfileStudentComponent {
 
   constructor() {}
 
+
+
   deleteStudy(studyID: number) {
 
     const studies = [...this.user.studies];
@@ -51,6 +53,7 @@ export class ProfileStudentComponent {
     };
     this.onDeleteLanguage.emit(user);
   }
+
 
     convertDate(inputFormat) {
         return AppSettings.convertDate(inputFormat);

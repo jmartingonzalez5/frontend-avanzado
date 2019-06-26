@@ -42,7 +42,7 @@ export class ProfileStudyComponent implements OnChanges {
     });
   }
 
-    getErrorMessageOption() {
+    public getErrorMessageOption() {
         return this.rForm.controls['option'].hasError('required') ? 'Debes introducir una opción' : '';
     }
 
