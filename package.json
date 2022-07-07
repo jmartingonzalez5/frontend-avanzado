@@ -40,7 +40,7 @@
     "core-js": "^2.5.4",
     "express": "^4.15.2",
     "localstorage-polyfill": "^1.0.1",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "ngrx-store-freeze": "^0.2.4",
     "ngrx-store-localstorage": "^7.0.0",
     "rxjs": "~6.4.0",
